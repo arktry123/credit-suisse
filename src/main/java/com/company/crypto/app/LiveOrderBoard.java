@@ -3,6 +3,7 @@ package com.company.crypto.app;
 import com.company.crypto.app.model.Order;
 import com.company.crypto.app.model.OrderType;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,4 +34,10 @@ public interface LiveOrderBoard {
      * @return Map of price and quantity
      */
     Map<Integer, Integer> viewLiveOrders(OrderType orderType);
+
+    /**
+     * gets all the existing orders
+     * @return
+     */
+    List<Order> getAllOrders();
 }

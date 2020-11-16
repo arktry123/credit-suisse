@@ -28,4 +28,9 @@ public class InMemoryLiveOrderBoardImpl implements LiveOrderBoard {
         return null;
     }
 
+    @Override
+    public List<Order> getAllOrders() {
+        return orders;
+    }
+
 }
