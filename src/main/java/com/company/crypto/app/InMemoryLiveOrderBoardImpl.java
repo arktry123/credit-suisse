@@ -2,7 +2,6 @@ package com.company.crypto.app;
 
 import com.company.crypto.app.model.Order;
 import com.company.crypto.app.model.OrderType;
-import com.company.crypto.app.view.LiveOrder;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -40,13 +39,11 @@ public class InMemoryLiveOrderBoardImpl implements LiveOrderBoard {
         Map<Integer, Integer> unsorted = orders.stream().filter(o -> o.getOrderType().equals(orderType))
                 .collect(groupingBy(Order::getPricePerCoin, summingInt(Order::getQuantity)));
 
-        Map<Integer, Integer> sorted = unsorted.entrySet().stream()
+        return unsorted.entrySet().stream()
                 .sorted(getComparator(orderType))
                 .limit(LIVE_ORDERS_MAX_SIZE)
-                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue(),
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
-        return sorted;
-
     }
 
     private Comparator<Map.Entry<Integer, Integer>> getComparator(OrderType orderType) {

@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 
 public class LiveOrderBoardTest {
 
-    private LiveOrderBoard orderBoard = new InMemoryLiveOrderBoardImpl();
+    private final LiveOrderBoard orderBoard = new InMemoryLiveOrderBoardImpl();
 
     @Test
     void testAdd() {
@@ -192,5 +192,20 @@ public class LiveOrderBoardTest {
     @Test
     void testSellWhenNoOrders() {
         Assertions.assertThat(orderBoard.viewLiveOrders(OrderType.SELL)).isEqualTo(Collections.EMPTY_MAP);
+    }
+
+    @Test
+    void testGivenUsecase(){
+        orderBoard.addOrder(new Order(OrderType.SELL, "userid1", "Ethereum", 35010, 1360));
+        orderBoard.addOrder(new Order(OrderType.SELL, "userid2", "cointype", 5050, 1400));
+        orderBoard.addOrder(new Order(OrderType.SELL, "userid3", "cointype", 44180, 1390));
+        orderBoard.addOrder(new Order(OrderType.SELL, "userid4", "cointype", 350, 1360));
+
+        HashMap<Integer, Integer> expectedOutput = new LinkedHashMap<>();
+        expectedOutput.put(1360, 35360);
+        expectedOutput.put(1390, 44180);
+        expectedOutput.put(1400, 5050);
+
+        Assertions.assertThat(orderBoard.viewLiveOrders(OrderType.SELL)).isEqualTo(expectedOutput);
     }
 }
