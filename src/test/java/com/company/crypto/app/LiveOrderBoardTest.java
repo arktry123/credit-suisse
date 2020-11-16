@@ -174,6 +174,7 @@ public class LiveOrderBoardTest {
 
     @Test
     void testSellWhenCancellingNonExistingOneOrder() {
+
         orderBoard.addOrder(new Order(OrderType.SELL, "userid1", "cointype", 10, 400));
         orderBoard.addOrder(new Order(OrderType.BUY, "userid2", "cointype", 11, 600));
         orderBoard.addOrder(new Order(OrderType.SELL, "userid3", "cointype", 13, 600));
@@ -186,5 +187,10 @@ public class LiveOrderBoardTest {
         expectedOutput.put(600, 13);
 
         Assertions.assertThat(orderBoard.viewLiveOrders(OrderType.SELL)).isEqualTo(expectedOutput);
+    }
+
+    @Test
+    void testSellWhenNoOrders() {
+        Assertions.assertThat(orderBoard.viewLiveOrders(OrderType.SELL)).isEqualTo(Collections.EMPTY_MAP);
     }
 }

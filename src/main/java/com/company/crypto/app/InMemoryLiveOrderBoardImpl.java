@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.summingInt;
 
 /**
- * In-memory implementation of the LiverOrderBoard interface
+ * In-memory implementation of the LiverOrderBoard interface.
  */
 public class InMemoryLiveOrderBoardImpl implements LiveOrderBoard {
     private static final int LIVE_ORDERS_MAX_SIZE = 10;
