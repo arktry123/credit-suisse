@@ -38,8 +38,7 @@ public class InMemoryLiveOrderBoardImpl implements LiveOrderBoard {
     public Map<Integer, Integer> viewLiveOrders(OrderType orderType) {
 
         Map<Integer, Integer> unsorted = orders.stream().filter(o -> o.getOrderType().equals(orderType))
-                .map(o -> new LiveOrder(o.getPricePerCoin(), o.getQuantity()))
-                .collect(groupingBy(LiveOrder::getPrice, summingInt(LiveOrder::getQuantity)));
+                .collect(groupingBy(Order::getPricePerCoin, summingInt(Order::getQuantity)));
 
         Map<Integer, Integer> sorted = unsorted.entrySet().stream()
                 .sorted(getComparator(orderType))
