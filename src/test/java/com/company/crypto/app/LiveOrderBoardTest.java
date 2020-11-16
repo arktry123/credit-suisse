@@ -14,4 +14,18 @@ public class LiveOrderBoardTest {
         orderBoard.addOrder(new Order(OrderType.SELL, "userid1", "cointype", 10, 700));
         Assertions.assertThat(orderBoard.getAllOrders()).hasSize(1);
     }
+
+    @Test
+    void testAddAndCancel() {
+        orderBoard.addOrder(new Order(OrderType.SELL, "userid1", "cointype", 10, 700));
+        orderBoard.cancelOrder(new Order(OrderType.SELL, "userid1", "cointype", 10, 700));
+        Assertions.assertThat(orderBoard.getAllOrders()).hasSize(0);
+    }
+
+    @Test
+    void testCancelNonExistingOrder() {
+        orderBoard.addOrder(new Order(OrderType.SELL, "userid1", "cointype", 10, 700));
+        orderBoard.cancelOrder(new Order(OrderType.SELL, "userid2", "cointype", 10, 700));
+        Assertions.assertThat(orderBoard.getAllOrders()).hasSize(1);
+    }
 }
