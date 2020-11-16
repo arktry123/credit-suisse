@@ -2,7 +2,7 @@
 
 ## Assumptions: 
 
-coinType is ignored when displaying the liver order board.
+coinType is ignored when displaying the live order board.
 
 ## Approach Followed
 Used Gradle as the build tool 
@@ -18,3 +18,5 @@ Maintained immutability and used streams.
 followed design principles like DRY and SOLID.
 
 Gave a no fuss solution - depended on TDD. 
+
+Used Lombok.
