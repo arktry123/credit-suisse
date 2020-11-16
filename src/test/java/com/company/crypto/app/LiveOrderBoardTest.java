@@ -47,4 +47,20 @@ public class LiveOrderBoardTest {
 
         Assertions.assertThat(orderBoard.viewLiveOrders(OrderType.SELL)).isEqualTo(expectedOutput);
     }
+
+    @Test
+    void testOnlyBuyOrders() {
+        orderBoard.addOrder(new Order(OrderType.BUY, "userid1", "cointype", 10, 700));
+        orderBoard.addOrder(new Order(OrderType.BUY, "userid2", "cointype", 11, 600));
+        orderBoard.addOrder(new Order(OrderType.BUY, "userid3", "cointype", 10, 500));
+        orderBoard.addOrder(new Order(OrderType.BUY, "userid4", "cointype", 10, 400));
+
+        HashMap<Integer, Integer> expectedOutput = new LinkedHashMap<>();
+        expectedOutput.put(700, 10);
+        expectedOutput.put(600, 11);
+        expectedOutput.put(500, 10);
+        expectedOutput.put(400, 10);
+
+        Assertions.assertThat(orderBoard.viewLiveOrders(OrderType.BUY)).isEqualTo(expectedOutput);
+    }
 }
