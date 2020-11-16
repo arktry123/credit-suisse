@@ -8,10 +8,10 @@ import lombok.Getter;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Order {
-    private OrderType orderType;
-    private String userId;
-    private String coinType;
+    private final OrderType orderType;
+    private final String userId;
+    private final String coinType;
     //the price and quantity are defined as int (after multiplying with 100)
-    private int quantity;
-    private int pricePerCoin;
+    private final int quantity;
+    private final int pricePerCoin;
 }
