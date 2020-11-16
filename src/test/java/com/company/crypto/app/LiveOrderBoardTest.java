@@ -5,6 +5,7 @@ import com.company.crypto.app.model.OrderType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -62,5 +63,23 @@ public class LiveOrderBoardTest {
         expectedOutput.put(400, 10);
 
         Assertions.assertThat(orderBoard.viewLiveOrders(OrderType.BUY)).isEqualTo(expectedOutput);
+    }
+    @Test
+    void testSellWhenNoSellOrders() {
+        orderBoard.addOrder(new Order(OrderType.BUY, "userid1", "cointype", 10, 700));
+        orderBoard.addOrder(new Order(OrderType.BUY, "userid2", "cointype", 11, 600));
+        orderBoard.addOrder(new Order(OrderType.BUY, "userid3", "cointype", 10, 500));
+        orderBoard.addOrder(new Order(OrderType.BUY, "userid4", "cointype", 10, 400));
+
+        Assertions.assertThat(orderBoard.viewLiveOrders(OrderType.SELL)).isEqualTo(Collections.EMPTY_MAP);
+    }
+    @Test
+    void testBuyWhenNoBuyOrders() {
+        orderBoard.addOrder(new Order(OrderType.SELL, "userid1", "cointype", 10, 700));
+        orderBoard.addOrder(new Order(OrderType.SELL, "userid2", "cointype", 11, 600));
+        orderBoard.addOrder(new Order(OrderType.SELL, "userid3", "cointype", 10, 500));
+        orderBoard.addOrder(new Order(OrderType.SELL, "userid4", "cointype", 10, 400));
+
+        Assertions.assertThat(orderBoard.viewLiveOrders(OrderType.BUY)).isEqualTo(Collections.EMPTY_MAP);
     }
 }
