@@ -7,6 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class LiveOrder {
     //the price and quantity are defined as int (after multiplying with 100)
-    private int price;
-    private int quantity;
+    private final int price;
+    private final int quantity;
 }

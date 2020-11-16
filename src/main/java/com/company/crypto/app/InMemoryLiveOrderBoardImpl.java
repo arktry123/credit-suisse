@@ -12,9 +12,9 @@ import static java.util.stream.Collectors.summingInt;
 
 public class InMemoryLiveOrderBoardImpl implements LiveOrderBoard {
     private static final int LIVE_ORDERS_MAX_SIZE = 10;
-    List<Order> orders = new ArrayList<>();
-    Comparator<Map.Entry<Integer, Integer>> sellComparator = Map.Entry.comparingByKey();
-    Comparator<Map.Entry<Integer, Integer>> buyComparator = sellComparator.reversed();
+    private final List<Order> orders = new ArrayList<>();
+    private static final Comparator<Map.Entry<Integer, Integer>> sellComparator = Map.Entry.comparingByKey();
+    private static final Comparator<Map.Entry<Integer, Integer>> buyComparator = sellComparator.reversed();
 
     @Override
     public void addOrder(Order order) {
