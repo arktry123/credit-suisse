@@ -26,7 +26,7 @@ public interface LiveOrderBoard {
 
     /**
      * returns the map of price and quantity (Map<Integer, Integer>) for a given ordertype
-     * - max of 10 entried will be returned.
+     * - max of 10 entries will be returned.
      * - The key of the returned Map represents the price as an int (for ex. £13.6 - will be 1360)
      * - The value of the returned Map represents quantity as an int (for ex. 350.1 - will be 35010)
      *
